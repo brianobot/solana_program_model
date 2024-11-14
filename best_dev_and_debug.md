@@ -11,4 +11,5 @@
             / lib.rs
         / Cargo.Toml
   ```
-Starting with Anchor v0.29.0, we can use ```anchor init -t multiple <NEW_PROGRAM_NAME>``` to generate this structure above
+> [!NOTE]  
+- Starting with Anchor v0.29.0, we can use ```anchor init -t multiple <NEW_PROGRAM_NAME>``` to generate this structure above
