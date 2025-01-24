@@ -9,20 +9,22 @@ Account constraints are applied to an account in a Account struct with the #[acc
     #[account(signer @ MyError::MyErrorCode)]
 
 - #[account(mut)]: used to check that the account is mutable, state change are persisted on the account
+  Note: if the mut is not provided and state is changed on the account in the instruction, the state change would not
+  be persisted on chain and the instruction would silently pass
   - custom errors can be supported via the @
     #[account(mut @ MyError::MyErrorCode)]
 
 - #[account(init)]: creates an account with CPI to system program, makes the account mutable, ensures the account is rent free
   excepted skipped by passing the ```rent_exempt = skip``` constraint
 
-  - Required constraints when using init
-    - requires a payer constraint to be an account that pays for the account creation
-    - requires the system program to exist in the struct and be called system_program
-    - requires the space constraint is specified (remember to add 8 bytes for discreminator, this only applies to account owned by anchor)
+  - Required constraints when using ```init```
+    - requires a ```payer``` constraint to be an account that pays for the account creation
+    - requires the ```system program``` to exist in the struct and be called system_program
+    - requires the ```space``` constraint is specified (remember to add 8 bytes for discreminator, this only applies to account owned by anchor)
 
   - Optional constraints when using init
-    - owner: to set the owner of the created account to an account other than the current program
-    - use seeds together with bump to create PDAs, the bump value can be left empty
+    - ```owner```: to set the owner of the created account to an account other than the current program
+    - use ```seeds``` together with ```bump``` to create PDAs, the bump value can be left empty
     - 
 
 - #[account(init_if_needed)]: exact same functionality as init, but does not create the account if it exists already
